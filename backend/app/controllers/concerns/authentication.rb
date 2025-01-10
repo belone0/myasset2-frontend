@@ -17,7 +17,7 @@ module Authentication
   end
 
   def authenticate_user!
-    render json: { error: 'Not authenticated' }, status: :unauthorized unless current_user
+    render json: { error: "Not authenticated" }, status: :unauthorized unless current_user
   end
 
   private
@@ -25,7 +25,7 @@ module Authentication
       resume_session
     end
 
-    def require_authentication 
+    def require_authentication
       authenticate_user!
     end
 
@@ -43,7 +43,7 @@ module Authentication
     end
 
     def after_authentication_url
-      '/users/me'
+      "/users/me"
     end
 
     def start_new_session_for(user)
@@ -59,7 +59,7 @@ module Authentication
         session.delete(:user_id) # Clear the session key
         session.delete(:session_id) # Clear other session keys if necessary
       else
-        Rails.logger.warn 'No active session to destroy.'
+        Rails.logger.warn "No active session to destroy."
       end
     end
 

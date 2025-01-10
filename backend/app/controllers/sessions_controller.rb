@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email_address: params[:email_address])
 
     if user&.authenticate(params[:password])
-      session[:user_id] = user.id 
+      session[:user_id] = user.id
 
       @session = Session.create(
         user: user,
@@ -19,10 +19,10 @@ class SessionsController < ApplicationController
 
       render json: user, status: :ok
     else
-      render json: { error: 'Invalid email or password' }, status: :unauthorized
+      render json: { error: "Invalid email or password" }, status: :unauthorized
     end
   end
-  
+
   def destroy
     terminate_session
   end
