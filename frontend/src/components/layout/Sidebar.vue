@@ -1,17 +1,43 @@
 <template>
-    <nav class="w-64 bg-blue-800 text-white flex-shrink-0 flex flex-col">
-      <div class="p-4 text-xl font-bold">MyApp</div>
-      <ul class="flex-1 space-y-2 p-4">
-        <li>
-          <router-link to="/dashboard" class="block px-4 py-2 rounded hover:bg-blue-700">
-            <i class="pi pi-home mr-2"></i> Dashboard
+  <aside
+    :class="[
+      'bg-white dark:bg-gray-900 border-r dark:border-gray-800 py-6 px-2 space-y-2 transition-all duration-300',
+      collapsed ? 'w-20' : 'w-64'
+    ]"
+    class="flex-shrink-0"
+  >
+    <nav>
+      <ul>
+        <li
+          v-for="(item, index) in menuItems"
+          :key="index"
+          class="text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded px-3 py-3 transition-colors"
+        >
+          <router-link
+            :to="item.to"
+            class="flex items-center space-x-2"
+            :class="collapsed ? 'justify-center' : ''"
+          >
+            <i :class="['pi', item.icon, 'text-xl']"></i>
+            <span v-if="!collapsed" class="text-sm">{{ item.label }}</span>
           </router-link>
         </li>
-        <!-- Add more menu items -->
       </ul>
-      <div class="p-4 text-sm">© 2025 MyApp</div>
     </nav>
-  </template>
-  
-  <script lang="ts" setup></script>
-  
+  </aside>
+</template>
+
+<script lang="ts" setup>
+import { defineProps } from 'vue';
+
+interface MenuItem {
+  label: string;
+  icon: string;
+  to: string;
+}
+
+const props = defineProps<{
+  collapsed: boolean;
+  menuItems: MenuItem[];
+}>();
+</script>

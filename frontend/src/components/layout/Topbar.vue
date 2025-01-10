@@ -1,42 +1,93 @@
-<template>
-    <header class="bg-white shadow flex justify-between items-center px-4 h-16">
-        <h1 class="text-lg font-semibold text-gray-700">Dashboard</h1>
-        <Menu ref="menu" :model="menuItems" popup />
-        <button @click="toggleMenu" class="flex items-center space-x-2">
-            <img :src="userAvatar" class="w-10 h-10 rounded-full" />
-            <span>{{ userName }}</span>
-            <i class="pi pi-chevron-down"></i>
-        </button>
-    </header>
-</template>
-
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, defineProps } from 'vue';
 import { useAuthStore } from '@/stores/auth';
-import Menu from 'primevue/menu';
-import router from '@/router';
 
 const authStore = useAuthStore();
-const userAvatar = ref('https://via.placeholder.com/40');
-const userName = ref('John Doe');
-const menu = ref();
 
-const menuItems = [
-    { label: 'Logout', icon: 'pi pi-sign-out', command: () => logout() },
-];
+const props = defineProps<{
+  isDark: boolean;
+  userAvatar?: string;
+  userName?: string;
+}>();
 
-const toggleMenu = (event: Event) => {
-    menu.value?.toggle(event);
+const showUserMenu = ref(false);
+const toggleUserMenu = () => {
+  showUserMenu.value = !showUserMenu.value;
 };
 
-const logout = () => {
-    authStore.logout();
-    router.push('/login');
+const onLogout = () => {
+  authStore.logout();
+  showUserMenu.value = false;
 };
 </script>
+<template>
+  <header
+    class="flex items-center justify-between p-4 border-b bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800 text-gray-800 dark:text-gray-100">
+    <!-- LEFT: Sidebar Toggle + "Plan" -->
+    <div class="flex items-center space-x-4">
+      <!-- Emit an event to toggle sidebar -->
+      <button @click="$emit('toggleSidebar')"
+        class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none">
+        <i class="pi pi-bars text-xl"></i>
+      </button>
 
-<style scoped>
-header {
-    z-index: 10;
-}
-</style>
+      <!-- Example "Personal plan" chip -->
+      <div
+        class="bg-gray-100 dark:bg-gray-800 py-1 px-3 rounded-full text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+        Personal plan
+      </div>
+    </div>
+
+    <!-- CENTER: Search bar (optional, hidden on small screens) -->
+    <div class="hidden md:flex w-1/2 mx-4">
+      <div class="relative flex-grow">
+        <span class="absolute inset-y-0 left-2 flex items-center text-gray-400">
+          <i class="pi pi-search"></i>
+        </span>
+        <input type="text" placeholder="Search..."
+          class="w-full pl-9 pr-4 py-2 rounded bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-200 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700 transition-colors" />
+      </div>
+    </div>
+
+    <!-- RIGHT: Date range + Dark Mode Toggle + User Avatar -->
+    <div class="flex items-center space-x-4">
+      <!-- Date Range (example) -->
+      <button
+        class="flex items-center space-x-2 py-1 px-3 bg-gray-100 dark:bg-gray-800 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+        <i class="pi pi-calendar"></i>
+        <span class="hidden sm:inline">06/01/2024 - 06/08/2024</span>
+      </button>
+
+      <!-- Dark Mode Toggle -->
+      <button class="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700" @click="$emit('toggleTheme')">
+        <i v-if="isDark" class="pi pi-sun text-xl"></i>
+        <i v-else class="pi pi-moon text-xl"></i>
+      </button>
+
+      <!-- USER AVATAR + DROPDOWN -->
+      <div class="relative">
+        <div class="flex items-center space-x-2 cursor-pointer" @click="toggleUserMenu">
+          <img :src="userAvatar" alt="User Avatar" class="w-8 h-8 rounded-full object-cover" />
+          <span class="hidden sm:inline">{{ userName }}</span>
+          <i class="pi pi-chevron-down"></i>
+        </div>
+
+        <!-- Dropdown Menu -->
+        <transition enter-active-class="transition ease-out duration-100 transform"
+          enter-from-class="opacity-0 scale-95" enter-to-class="opacity-100 scale-100"
+          leave-active-class="transition ease-in duration-75 transform" leave-from-class="opacity-100 scale-100"
+          leave-to-class="opacity-0 scale-95">
+          <ul v-if="showUserMenu"
+            class="absolute right-0 mt-2 w-48 py-2 bg-white dark:bg-gray-800 rounded shadow-xl z-20">
+            <li
+              class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 cursor-pointer text-gray-700 dark:text-gray-200"
+              @click="onLogout">
+              <i class="pi pi-sign-out"></i>
+              <span>Logout</span>
+            </li>
+          </ul>
+        </transition>
+      </div>
+    </div>
+  </header>
+</template>

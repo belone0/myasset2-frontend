@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
 import { useAuthStore } from '@/stores/auth';
 
 const router = createRouter({
@@ -18,7 +17,7 @@ const router = createRouter({
         {
           path: 'dashboard',
           name: 'Dashboard',
-          component: () => import('../components/dashboard/Dashboard.vue'),
+          component: () => import('../views/Dashboard.vue'),
         },
       ],
     },
