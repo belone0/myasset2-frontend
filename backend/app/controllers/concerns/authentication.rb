@@ -6,10 +6,18 @@ module Authentication
     helper_method :authenticated?
   end
 
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+  end
+
   class_methods do
     def allow_unauthenticated_access(**options)
       skip_before_action :require_authentication, **options
     end
+  end
+
+  def authenticate_user!
+    render json: { error: 'Not authenticated' }, status: :unauthorized unless current_user
   end
 
   private
@@ -18,7 +26,7 @@ module Authentication
     end
 
     def require_authentication
-      resume_session || request_authentication
+      authenticate_user!
     end
 
     def resume_session
@@ -35,7 +43,7 @@ module Authentication
     end
 
     def after_authentication_url
-      session.delete(:return_to_after_authenticating) || root_url
+      '/users/me'
     end
 
     def start_new_session_for(user)

@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: %i[ show update destroy ]
-  allow_unauthenticated_access 
+  allow_unauthenticated_access
 
   # GET /todos
   def index

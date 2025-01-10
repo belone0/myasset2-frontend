@@ -6,11 +6,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if user = User.authenticate_by(params.permit(:email_address, :password))
-      start_new_session_for user
-      redirect_to after_authentication_url
+    user = User.find_by(email_address: params[:email_address]) # Adjust for your actual field name (e.g., `email_address`)
+
+    if user&.authenticate(params[:password]) # Assuming `has_secure_password` is used
+      session[:user_id] = user.id
+      render json: user, status: :ok
     else
-      redirect_to new_session_path, alert: "Try another email address or password."
+      render json: { error: 'Invalid email or password' }, status: :unauthorized
     end
   end
 
