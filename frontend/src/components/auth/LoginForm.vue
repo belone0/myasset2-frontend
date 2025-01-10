@@ -1,3 +1,34 @@
+<template>
+    <form @submit.prevent="handleSubmit" class="flex flex-col space-y-4">
+        <!-- Email -->
+        <div class="flex flex-col space-y-1">
+            <label for="email_address" class="text-sm font-medium">
+                Email:
+            </label>
+            <input id="email_address" v-model="email_address" type="email" placeholder="Enter your email address"
+                required class="px-3 py-2 rounded bg-gray-700 text-gray-100 border border-gray-700
+                 focus:outline-none focus:ring-2 focus:ring-purple-500
+                 placeholder-gray-400" />
+        </div>
+
+        <!-- Password -->
+        <div class="flex flex-col space-y-1">
+            <label for="password" class="text-sm font-medium">
+                Password:
+            </label>
+            <input id="password" v-model="password" type="password" placeholder="Enter your password" required class="px-3 py-2 rounded bg-gray-700 text-gray-100 border border-gray-700
+                 focus:outline-none focus:ring-2 focus:ring-purple-500
+                 placeholder-gray-400" />
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded
+               transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500">
+            Login
+        </button>
+    </form>
+</template>
+
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
@@ -10,41 +41,3 @@ const handleSubmit = () => {
     authStore.login(email_address.value, password.value);
 };
 </script>
-
-<template>
-    <form @submit.prevent="handleSubmit" class="login-form">
-        <label for="email_address">Email:</label>
-        <input id="email_address" v-model="email_address" type="email" placeholder="Enter your email address" required />
-
-        <label for="password">Password:</label>
-        <input id="password" v-model="password" type="password" placeholder="Enter your password" required />
-
-        <button type="submit">Login</button>
-    </form>
-</template>
-
-<style scoped>
-.login-form {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    gap: 10px;
-}
-
-.login-form input,
-.login-form button {
-    padding: 10px;
-    font-size: 16px;
-}
-
-.login-form button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.login-form button:hover {
-    background-color: #0056b3;
-}
-</style>

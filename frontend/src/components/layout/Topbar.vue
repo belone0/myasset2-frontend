@@ -31,10 +31,9 @@ const onLogout = () => {
         <i class="pi pi-bars text-xl"></i>
       </button>
 
-      <!-- Example "Personal plan" chip -->
       <div
         class="bg-gray-100 dark:bg-gray-800 py-1 px-3 rounded-full text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-        Personal plan
+        My Asset 2
       </div>
     </div>
 
@@ -55,7 +54,7 @@ const onLogout = () => {
       <button
         class="flex items-center space-x-2 py-1 px-3 bg-gray-100 dark:bg-gray-800 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
         <i class="pi pi-calendar"></i>
-        <span class="hidden sm:inline">06/01/2024 - 06/08/2024</span>
+        <span class="hidden sm:inline">06/01/2024 </span>
       </button>
 
       <!-- Dark Mode Toggle -->
