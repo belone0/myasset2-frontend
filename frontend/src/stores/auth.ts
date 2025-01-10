@@ -1,15 +1,18 @@
 import { defineStore } from 'pinia';
 import { login, logout, fetchCurrentUser } from '@/services/authService';
+import router from '@/router';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: null as { email: string } | null,
+    user: null as { email_address: string } | null,
   }),
   actions: {
-    async login(email: string, password: string) {
+    async login(email_address: string, password: string) {
       try {
-        const user = await login(email, password);
+        const user = await login(email_address, password);
         this.user = user;
+
+        router.push('/dashboard');
         alert('Login successful');
       } catch (error) {
         console.error('Login failed:', error);
@@ -19,7 +22,9 @@ export const useAuthStore = defineStore('auth', {
     async logout() {
       try {
         await logout();
-        this.user = null;
+        this.user = null;        
+
+        router.push('/login');
         alert('Logged out successfully');
       } catch (error) {
         console.error('Logout failed:', error);
@@ -28,10 +33,11 @@ export const useAuthStore = defineStore('auth', {
     async fetchCurrentUser() {
       try {
         const user = await fetchCurrentUser();
+        console.log('Fetched user:', user);
         this.user = user;
+        router.push('/dashboard');
       } catch (error) {
-        console.error('Failed to fetch user:', error);
-        this.user = null;
+        console.log('Log in!');
       }
     },
   },

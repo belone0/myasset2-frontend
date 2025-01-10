@@ -25,7 +25,7 @@ module Authentication
       resume_session
     end
 
-    def require_authentication
+    def require_authentication 
       authenticate_user!
     end
 
@@ -54,7 +54,16 @@ module Authentication
     end
 
     def terminate_session
-      Current.session.destroy
-      cookies.delete(:session_id)
+      if current_session
+        current_session.destroy
+        session.delete(:user_id) # Clear the session key
+        session.delete(:session_id) # Clear other session keys if necessary
+      else
+        Rails.logger.warn 'No active session to destroy.'
+      end
+    end
+
+    def current_session
+      @current_session ||= Session.find_by(user_id: current_user.id) # Adjust for your session model
     end
 end

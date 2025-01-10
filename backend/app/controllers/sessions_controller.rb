@@ -6,18 +6,24 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email_address: params[:email_address]) # Adjust for your actual field name (e.g., `email_address`)
+    user = User.find_by(email_address: params[:email_address])
 
-    if user&.authenticate(params[:password]) # Assuming `has_secure_password` is used
-      session[:user_id] = user.id
+    if user&.authenticate(params[:password])
+      session[:user_id] = user.id 
+
+      @session = Session.create(
+        user: user,
+        ip_address: request.remote_ip,
+        user_agent: request.user_agent
+      )
+
       render json: user, status: :ok
     else
       render json: { error: 'Invalid email or password' }, status: :unauthorized
     end
   end
-
+  
   def destroy
     terminate_session
-    redirect_to new_session_path
   end
 end
