@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resource :users, only: [] do
     get :me, on: :collection
+    post :create, on: :collection
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -1,3 +1,11 @@
+<script lang="ts" setup>
+import { useAuthStore } from '@/stores/auth';
+
+const user = useAuthStore().getUser;
+
+
+</script>
+
 <template>
     <div class="p-4 sm:p-6 bg-gray-100 dark:bg-gray-900">
         <!-- Page Heading -->
@@ -129,9 +137,3 @@
             </div>
         </div>
 </template>
-
-<script lang="ts" setup>
-// No props or setup needed if you're hardcoding
-// these data placeholders. If you want, you can
-// pass them in as props from the parent.
-</script>

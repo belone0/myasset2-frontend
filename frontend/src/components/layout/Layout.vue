@@ -2,6 +2,9 @@
 import { ref, watch, onMounted } from 'vue';
 import Topbar from '@/components/layout/Topbar.vue';
 import Sidebar from '@/components/layout/Sidebar.vue';
+import { useAuthStore } from '@/stores/auth';
+
+const authStore = useAuthStore();
 
 const collapsed = ref(false);
 const toggleSidebar = () => {
@@ -24,7 +27,7 @@ onMounted(() => {
 });
 
 const userAvatar = ref('https://cdn-icons-png.flaticon.com/512/219/219983.png');
-const userName = ref('belone');
+const userName = authStore.getUser?.email_address;
 
 const menuItems = [
   { label: 'Dashboard', icon: 'pi pi-home', to: '/dashboard' },

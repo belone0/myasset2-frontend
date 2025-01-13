@@ -10,6 +10,11 @@ const router = createRouter({
       component: () => import('../views/auth/LoginView.vue'),
     },
     {
+      path: '/register',
+      name: 'Register',
+      component: () => import('../views/auth/RegisterView.vue'),
+    },
+    {
       path: '/',
       name: 'Main',
       component: () => import('../components/layout/Layout.vue'),
@@ -26,13 +31,13 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
-  const isAuthenticated = !!authStore.user;
+  const authenticated = authStore.isLoggedIn;
 
-  if (to.name !== 'Login' && !isAuthenticated) {
+  if ((to.name !== 'Login' && to.name !== 'Register') && !authenticated) {
     next({ name: 'Login' });
-  } else {
-    next();
+    return;
   }
+  next();
 });
 
 export default router

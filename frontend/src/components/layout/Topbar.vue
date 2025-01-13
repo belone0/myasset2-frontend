@@ -11,6 +11,7 @@ const props = defineProps<{
 }>();
 
 const showUserMenu = ref(false);
+
 const toggleUserMenu = () => {
   showUserMenu.value = !showUserMenu.value;
 };
@@ -19,6 +20,8 @@ const onLogout = () => {
   authStore.logout();
   showUserMenu.value = false;
 };
+
+const date = new Date().toLocaleDateString()
 </script>
 <template>
   <header
@@ -54,7 +57,7 @@ const onLogout = () => {
       <button
         class="flex items-center space-x-2 py-1 px-3 bg-gray-100 dark:bg-gray-800 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
         <i class="pi pi-calendar"></i>
-        <span class="hidden sm:inline">06/01/2024 </span>
+        <span class="hidden sm:inline">{{ date }}</span>
       </button>
 
       <!-- Dark Mode Toggle -->
