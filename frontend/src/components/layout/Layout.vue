@@ -3,28 +3,18 @@ import { ref, watch, onMounted } from 'vue';
 import Topbar from '@/components/layout/Topbar.vue';
 import Sidebar from '@/components/layout/Sidebar.vue';
 import { useAuthStore } from '@/stores/auth';
+import { useThemeStore } from '@/stores/theme';
 
 const authStore = useAuthStore();
+const themeStore = useThemeStore();
+
+const theme = ref(themeStore.theme);
+const toggleTheme = () => themeStore.toggleTheme();
 
 const collapsed = ref(false);
 const toggleSidebar = () => {
   collapsed.value = !collapsed.value;
 };
-
-const darkMode = ref(false);
-const toggleTheme = () => {
-  darkMode.value = !darkMode.value;
-};
-
-watch(darkMode, (val) => {
-  document.documentElement.classList.toggle('dark', val);
-});
-
-onMounted(() => {
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    darkMode.value = true;
-  }
-});
 
 const userAvatar = ref('https://cdn-icons-png.flaticon.com/512/219/219983.png');
 const userName = authStore.getUser?.email_address;
@@ -39,7 +29,7 @@ const menuItems = [
 
 <template>
   <div class="min-h-screen flex flex-col">
-    <Topbar :isDark="darkMode" :userAvatar="userAvatar" :userName="userName" @toggleSidebar="toggleSidebar"
+    <Topbar :theme="theme" :userAvatar="userAvatar" :userName="userName" @toggleSidebar="toggleSidebar"
       @toggleTheme="toggleTheme" />
 
     <div class="flex flex-grow bg-gray-100 dark:bg-gray-900">

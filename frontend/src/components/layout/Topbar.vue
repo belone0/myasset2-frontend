@@ -1,20 +1,29 @@
 <script lang="ts" setup>
-import { ref, defineProps } from 'vue';
+import { ref, defineProps, defineEmits } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 
 const authStore = useAuthStore();
 
 const props = defineProps<{
-  isDark: boolean;
+  theme: string;
   userAvatar?: string;
   userName?: string;
 }>();
+
+const emit = defineEmits(['toggleSidebar', 'toggleTheme']);
+
+const isDark = ref(props.theme === 'dark');
 
 const showUserMenu = ref(false);
 
 const toggleUserMenu = () => {
   showUserMenu.value = !showUserMenu.value;
 };
+
+const toggleTheme = () => {
+  emit('toggleTheme');
+  isDark.value = !isDark.value;
+}
 
 const onLogout = () => {
   authStore.logout();
@@ -61,9 +70,9 @@ const date = new Date().toLocaleDateString()
       </button>
 
       <!-- Dark Mode Toggle -->
-      <button class="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700" @click="$emit('toggleTheme')">
-        <i v-if="isDark" class="pi pi-sun text-xl"></i>
-        <i v-else class="pi pi-moon text-xl"></i>
+      <button class="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700" @click="toggleTheme">
+        <i v-if="isDark" class="pi pi-moon text-xl"></i>
+        <i v-else class="pi pi-sun text-xl"></i>
       </button>
 
       <!-- USER AVATAR + DROPDOWN -->
