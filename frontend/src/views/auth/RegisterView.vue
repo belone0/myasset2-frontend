@@ -65,8 +65,8 @@ const handleSubmit = () => {
                 </button>
             </form>
         </div>
-        <p class="mt-2 text-gray-300">Already have an account? <RouterLink to="/login"
-                class="hover:text-purple-600 text-purple-500 hover:cursor-pointer">Login!</RouterLink>
+        <p class="mt-2 text-gray-300">Already have an account? <router-link to="/login"
+                class="hover:text-purple-600 text-purple-500 hover:cursor-pointer">Login!</router-link>
         </p>
     </div>
 </template>

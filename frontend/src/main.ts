@@ -9,11 +9,15 @@ import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
 import 'primeicons/primeicons.css'
 
-
 const app = createApp(App)
 
 app.use(createPinia())
-app.use(router)
+
+const authStore = useAuthStore();
+await authStore.fetchCurrentUser();
+
+const themeStore = useThemeStore();
+themeStore.initializeTheme();
 
 app.use(PrimeVue, {
     theme: {
@@ -21,10 +25,6 @@ app.use(PrimeVue, {
     }
 });
 
-const authStore = useAuthStore()
-authStore.fetchCurrentUser();
-
-const themeStore = useThemeStore();
-themeStore.initializeTheme();
+app.use(router)
 
 app.mount('#app')

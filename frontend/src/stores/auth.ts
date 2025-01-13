@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia';
 import { login, logout, fetchCurrentUser, register } from '@/services/authService';
 import router from '@/router';
+import type { User } from '@/types/User';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: null as { email_address: string } | null,
+    user: null as User | null,
   }),
   getters: {
     isLoggedIn: (state) => !!state.user,
@@ -13,8 +14,8 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login(email_address: string, password: string) {
       try {
-        const user = await login(email_address, password);
-        this.setUser(user);
+        const user_data = await login(email_address, password);
+        this.setUser(user_data);
 
         router.push('/dashboard');
         alert('Login successful');
@@ -25,8 +26,8 @@ export const useAuthStore = defineStore('auth', {
     },
     async register(email_address: string, password: string) {
       try {
-        const user = await register(email_address, password);
-        this.setUser(user);
+        const user_data = await register(email_address, password);
+        this.setUser(user_data);
 
         router.push('/login');
         alert('Registered successfully, now log in with your account!');
@@ -48,15 +49,16 @@ export const useAuthStore = defineStore('auth', {
     },
     async fetchCurrentUser() {
       try {
-        const user = await fetchCurrentUser();
-        console.log('Fetched user:', user);
-        this.setUser(user);
-        router.push('/dashboard');
+
+        const user_data = await fetchCurrentUser();
+        console.log('Fetched user:', user_data);
+
+        this.setUser(user_data);
       } catch (error) {
         console.log('Log in!');
       }
     },
-    async setUser(user: { email_address: string } | null) {
+    async setUser(user: User | null) {
       this.user = user;
     }
   }

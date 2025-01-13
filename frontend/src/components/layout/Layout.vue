@@ -21,8 +21,8 @@ const userName = authStore.getUser?.email_address;
 
 const menuItems = [
   { label: 'Dashboard', icon: 'pi pi-home', to: '/dashboard' },
-  { label: 'Reports', icon: 'pi pi-chart-bar', to: '/reports' },
-  { label: 'Settings', icon: 'pi pi-cog', to: '/settings' },
+  { label: 'Todo', icon: 'pi pi-check', to: '/todo' },
+  // { label: 'Settings', icon: 'pi pi-cog', to: '/settings' },
 ];
 
 </script>

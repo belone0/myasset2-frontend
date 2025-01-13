@@ -35,15 +35,14 @@
         </button>
       </form>
     </div>
-    <p class="mt-2 text-gray-300">Don't have an account yet? <RouterLink to="/register"
-        class="hover:text-purple-600 text-purple-500 hover:cursor-pointer">Create one here!</RouterLink>
+    <p class="mt-2 text-gray-300">Don't have an account yet? <router-link to="/register"
+        class="hover:text-purple-600 text-purple-500 hover:cursor-pointer">Create one here!</router-link>
     </p>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 
 // Data properties

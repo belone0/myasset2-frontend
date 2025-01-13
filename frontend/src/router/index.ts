@@ -24,6 +24,11 @@ const router = createRouter({
           name: 'Dashboard',
           component: () => import('../views/Dashboard.vue'),
         },
+        {
+          path: 'todo',
+          name: 'Todo',
+          component: () => import('../views/TodoView.vue'),
+        },
       ],
     },
   ],
@@ -31,7 +36,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
-  const authenticated = authStore.isLoggedIn;
+  const authenticated = authStore.isLoggedIn;  
 
   if ((to.name !== 'Login' && to.name !== 'Register') && !authenticated) {
     next({ name: 'Login' });
