@@ -1,4 +1,3 @@
-// models/User.ts or types/User.ts
 export interface User {
     id: number;
     email_address: string;
