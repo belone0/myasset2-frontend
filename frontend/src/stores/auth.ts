@@ -50,7 +50,7 @@ export const useAuthStore = defineStore('auth', {
     async fetchCurrentUser() {
       try {
         const user_data = await fetchCurrentUser();
-        console.log('Fetched user:', user_data);
+        console.log('Fetched user!');
 
         this.setUser(user_data);
       } catch (error) {

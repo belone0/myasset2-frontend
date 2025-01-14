@@ -32,8 +32,14 @@ const router = createRouter({
         {
           path: 'balancing',
           name: 'Balancing',
-          component: () => import('../views/Balancing.vue'),
+          component: () => import('../views/balancing/Balancing.vue'),
         },
+        {
+          path: '/balancing-history',
+          name: 'BalancingHistory',
+          component: () => import('../views/balancing/BalancingHistory.vue'), 
+        }
+        
       ],
     },
   ],
