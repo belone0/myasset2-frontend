@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import TodoList from '@/components/todo/TodoList.vue';
 import Overview from '@/components/dashboard/Overview.vue';
+import Conversion from '@/components/currency/Conversion.vue';
+
 </script>
 <template>
     <div class="p-4 sm:p-6 bg-gray-100 dark:bg-gray-900">
@@ -21,6 +23,8 @@ import Overview from '@/components/dashboard/Overview.vue';
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             <TodoList />
+
+            <Conversion />
 
             <!-- Currency Card -->
             <div class="bg-white dark:bg-gray-800 p-4 rounded-lg space-y-2">

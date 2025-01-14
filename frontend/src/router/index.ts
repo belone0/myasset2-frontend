@@ -29,6 +29,11 @@ const router = createRouter({
           name: 'Todo',
           component: () => import('../views/TodoView.vue'),
         },
+        {
+          path: 'balancing',
+          name: 'Balancing',
+          component: () => import('../views/Balancing.vue'),
+        },
       ],
     },
   ],

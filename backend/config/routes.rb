@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :balancings do
+    resources :balancing_assets, only: [:index, :create]
+  end
+  resources :balancing_assets, only: [:update, :destroy]
+  
   resources :todos
   resource :session
   resources :passwords, param: :token

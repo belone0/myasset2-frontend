@@ -24,7 +24,7 @@ const deleteTodo = (id: number) => {
 </script>
 
 <template>
-    <div class="p-4 w-full overflow-auto bg-white dark:bg-gray-800 rounded-lg  mb-6">
+    <div class="p-4 w-full overflow-auto bg-white dark:bg-gray-800 rounded-lg ">
 
         <div class="flex justify-between">
             <h1 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">

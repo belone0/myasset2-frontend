@@ -22,7 +22,7 @@ function isActive(path: string) {
 
 <template>
   <aside :class="[
-    'bg-white dark:bg-gray-900 border-r dark:border-gray-800 py-6 px-2 space-y-2 transition-all duration-300',
+    'bg-white dark:bg-gray-900 border-r dark:border-gray-800 py-3 px-2 space-y-2 transition-all duration-300',
     collapsed ? 'w-16' : 'w-52'
   ]" class="flex-shrink-0">
     <nav>

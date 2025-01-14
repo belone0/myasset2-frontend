@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_13_184805) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_14_131009) do
+  create_table "balancing_assets", force: :cascade do |t|
+    t.integer "balancing_id", null: false
+    t.string "asset_type", null: false
+    t.decimal "current_value", precision: 15, scale: 2, default: "0.0"
+    t.decimal "current_percentage", precision: 5, scale: 2, default: "0.0"
+    t.decimal "desired_percentage", precision: 5, scale: 2, default: "0.0"
+    t.decimal "updated_value", precision: 15, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["balancing_id"], name: "index_balancing_assets_on_balancing_id"
+  end
+
+  create_table "balancings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.decimal "total_value", precision: 15, scale: 2, default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_balancings_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "ip_address"
@@ -37,6 +57,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_13_184805) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "balancing_assets", "balancings"
+  add_foreign_key "balancings", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "todos", "users"
 end

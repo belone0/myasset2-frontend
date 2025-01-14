@@ -36,11 +36,17 @@ const deleteTodo = (id: number) => {
 
 <template>
     <!-- Container: we keep p-4 so it fits with our sidebar/topbar layout -->
-    <div class="p-4 w-full md:w-2/3 lg:w-1/3 overflow-auto">
+    <div class="min-h-screen p-4 sm:p-6 bg-gray-100 dark:bg-gray-900">
         <!-- Page Heading -->
-        <h1 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">
-            Todo List
-        </h1>
+        <div class="mb-4">
+            <h1 class="text-xl sm:text-2xl font-bold mb-1 text-gray-800 dark:text-gray-100">
+                Todo List
+            </h1>
+            <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+                Manage your todo list 
+            </p>
+        </div>
+
 
         <!-- "Card" for Add New Todo (Tailwind) -->
         <div class="rounded-lg shadow-sm p-4 mb-6
