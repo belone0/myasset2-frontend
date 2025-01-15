@@ -3,7 +3,7 @@ class BalancingsController < ApplicationController
   before_action :set_balancing, only: %i[ show update destroy ]
 
   def index
-    @balancings = current_user.balancings
+    @balancings = current_user.balancings.order(created_at: :desc)
 
     render json: @balancings, include: :balancing_assets
   end

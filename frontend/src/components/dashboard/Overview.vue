@@ -12,7 +12,7 @@ onMounted(() => {
 
 const balancings = computed(() => store.balancings);
 
-const last_balancing = balancings.value[balancings.value.length - 1]
+const last_balancing = balancings.value[0]
 
 const goToHistory = () => {
     const id = last_balancing.id;
@@ -29,7 +29,7 @@ const goToNewBalancing = () => {
              md:items-center md:justify-between mb-6">
         <div>
             <div class="text-3xl md:text-4xl font-bold mb-1 text-gray-800 dark:text-gray-100">
-                {{ last_balancing?.total_value }}
+                {{ last_balancing?.total_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}
             </div>
             <div class="text-sm text-gray-500 dark:text-gray-400">
                 Last balancing: You portfolio was last saved with this value ({{
