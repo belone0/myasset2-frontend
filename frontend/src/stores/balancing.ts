@@ -6,17 +6,19 @@ import type { BalancingAsset } from '@/types/BalancingAsset';
 export const useBalancingStore = defineStore('balancing', {
     state: () => ({
         balancings: [] as Balancing[],
-        balancing_assets: [] as BalancingAsset[],
         loading: false,
         error: null as string | null,
     }),
+    getters: {
+        getBalancings: (state) => state.balancings,
+    },
     actions: {
         async fetchBalancings() {
             this.loading = true;
             this.error = null;
             try {
                 const response = await apiClient.get('/balancings');
-                this.balancings = response.data;
+                this.setBalancings(response.data);                
             } catch (e: any) {
                 this.error = 'Failed to load Balancings';
             } finally {
@@ -32,7 +34,7 @@ export const useBalancingStore = defineStore('balancing', {
                     balancing: { total_value: totalValue, balancing_assets_attributes: assets },
                 });
                 const createdBalancing = response.data;
-                this.balancings.push(createdBalancing);
+                this.pushToBalancings(createdBalancing);
                 alert('created')
                 return createdBalancing;
             } catch (err: any) {
@@ -48,8 +50,8 @@ export const useBalancingStore = defineStore('balancing', {
             try {
                 const response = await apiClient.post('/balancings', { balancing: newBal });
                 const created = response.data;
-                this.balancings.push(created);
-                return created; 
+                this.pushToBalancings(created);
+                return created;
             } catch (e: any) {
                 this.error = 'Failed to create Balancing';
             }
@@ -58,10 +60,19 @@ export const useBalancingStore = defineStore('balancing', {
             this.error = null;
             try {
                 await apiClient.delete(`/balancings/${id}`);
-                this.balancings = this.balancings.filter((bal) => bal.id !== id);
+                this.removeFromBalancings(id);
             } catch (e: any) {
                 this.error = 'Failed to delete Balancing';
             }
         },
+        async setBalancings(balancings: Balancing[]) {
+            this.balancings = balancings;
+        },
+        async pushToBalancings(balancing: Balancing) {
+            this.balancings.push(balancing);
+        },
+        async removeFromBalancings(id: number) {
+            this.balancings = this.balancings.filter((bal) => bal.id !== id);
+        }
     },
 });

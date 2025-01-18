@@ -3,16 +3,12 @@ import { useBalancingStore } from '@/stores/balancing';
 import { computed, ref, onMounted } from 'vue';
 import formatDate from '@/utils/formatDate';
 import router from '@/router';
+import type { Balancing } from '@/types/Balancing';
 
 const store = useBalancingStore();
+await store.fetchBalancings();
 
-onMounted(() => {
-    store.fetchBalancings();
-});
-
-const balancings = computed(() => store.balancings);
-
-const last_balancing = balancings.value[0]
+const last_balancing = store.getBalancings[0];
 
 const goToHistory = () => {
     const id = last_balancing.id;
@@ -21,7 +17,6 @@ const goToHistory = () => {
 const goToNewBalancing = () => {
     router.push('/balancing');
 }
-
 </script>
 
 <template>
@@ -29,7 +24,7 @@ const goToNewBalancing = () => {
              md:items-center md:justify-between mb-6">
         <div>
             <div class="text-3xl md:text-4xl font-bold mb-1 text-gray-800 dark:text-gray-100">
-                {{ last_balancing?.total_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}
+                R$ {{ last_balancing.total_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}
             </div>
             <div class="text-sm text-gray-500 dark:text-gray-400">
                 Last balancing: You portfolio was last saved with this value ({{
@@ -37,7 +32,7 @@ const goToNewBalancing = () => {
         </div>
         <div class="mt-4 md:mt-0 flex space-x-2">
             <button class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4
-                 rounded transition-colors" @click="goToHistory()"> 
+                 rounded transition-colors" @click="goToHistory()">
                 Balancing details
             </button>
             <button class="bg-transparent border border-gray-300 dark:border-gray-600
@@ -47,6 +42,7 @@ const goToNewBalancing = () => {
                 New Balancing
             </button>
             
+
         </div>
     </div>
 </template>

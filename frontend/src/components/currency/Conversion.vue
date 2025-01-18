@@ -57,7 +57,7 @@ const toAmount = computed(() => {
         </p>
 
         <button @click="toggleCurrencies" class="inline-flex items-center px-2 py-1
-             text-xs font-medium rounded border text-white bg-purple-600
+             text-xs font-medium rounded  text-white bg-purple-600
              hover:bg-purple-700 focus:ring-purple-500 focus:border-purple-500">
             Swap
         </button>

@@ -108,13 +108,13 @@ function toggleCurrencyModal() {
         </h2>
 
         <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-5">
-            <div v-for="(asset, index) in assets" :key="index" class="p-3 border border-gray-200 dark:border-gray-700 
+            <div v-for="(asset, index) in assets" :key="index" class="p-3  dark:border-gray-700 
                        rounded-md shadow-sm dark:bg-gray-800 bg-white">
                 <div class="mb-2">
                     <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
                         Asset Type
                     </label>
-                    <input v-model="asset.asset_type" type="text" class="w-full p-1 text-sm rounded border border-gray-300 
+                    <input v-model="asset.asset_type" type="text" class="w-full p-3 text-sm rounded  
                                dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100  
                                bg-gray-50 text-gray-800
                                focus:ring-blue-500 focus:border-blue-500" />
@@ -124,7 +124,7 @@ function toggleCurrencyModal() {
                     <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
                         Current Value
                     </label>
-                    <input v-model.number="asset.current_value" type="number" @input="recalculateAll" class="w-full p-1 text-sm rounded border border-gray-300 
+                    <input v-model.number="asset.current_value" type="number" @input="recalculateAll" class="w-full p-3 text-sm rounded  
                                dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 
                                bg-gray-50 text-gray-800
                                focus:ring-blue-500 focus:border-blue-500" />
@@ -134,7 +134,7 @@ function toggleCurrencyModal() {
                     <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
                         Desired %
                     </label>
-                    <input v-model.number="asset.desired_percentage" type="number" @input="recalculateAll" class="w-full p-1 text-sm rounded border border-gray-300 
+                    <input v-model.number="asset.desired_percentage" type="number" @input="recalculateAll" class="w-full p-3 text-sm rounded  
                                dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 
                                bg-gray-50 text-gray-800
                                focus:ring-blue-500 focus:border-blue-500" />

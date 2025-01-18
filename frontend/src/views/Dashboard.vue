@@ -17,7 +17,10 @@ import Conversion from '@/components/currency/Conversion.vue';
         </div>
 
         <!-- Overview Row -->
-        <Overview />
+        <Suspense>
+            <Overview />
+        </Suspense>
+
 
         <!-- Card Grid Section -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
