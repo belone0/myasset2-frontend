@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import Historytable from '@/components/balancing/Historytable.vue';
+import Chart from '@/components/balancing/Chart.vue';
 
 </script>
 <template>
@@ -16,5 +17,11 @@ import Historytable from '@/components/balancing/Historytable.vue';
         </div>
 
         <Historytable />
+
+        <div class="mt-6">
+            <Suspense>
+                <Chart />
+            </Suspense>
+        </div>
     </div>
 </template>

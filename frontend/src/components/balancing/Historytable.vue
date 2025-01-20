@@ -54,7 +54,12 @@ function getAssetsDetails(balancing: any) {
 }
 
 function goToBalancingDetail(id: number) {
-    router.push({ name: 'BalancingDetails', params: { id } });
+    router.push({ name: 'BalancingResults', params: { id: id } });
+}
+
+function deleteBalancing(id: number) {
+    store.deleteBalancing(id);
+    alert(store.error ? store.error : 'Sucessfully deleted balancing')
 }
 </script>
 <template>
@@ -67,7 +72,7 @@ function goToBalancingDetail(id: number) {
                     <th class="px-4 py-2 whitespace-nowrap">Date</th>
                     <th class="px-4 py-2 whitespace-nowrap">Total Value</th>
                     <th class="px-4 py-2 whitespace-nowrap">Assets</th>
-                    <th class="px-4 py-2 whitespace-nowrap">Details</th>
+                    <th class="px-4 py-2 whitespace-nowrap">Actions</th>
                 </tr>
             </thead>
 
@@ -82,7 +87,7 @@ function goToBalancingDetail(id: number) {
 
                     <!-- Total Value -->
                     <td class="px-4 py-2 text-gray-800 dark:text-gray-100 whitespace-nowrap">
-                        {{ Number(balancing.total_value).toFixed(2) }}
+                    {{ Number(balancing.total_value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}
                     </td>
 
                     <!-- Assets -->
@@ -91,11 +96,14 @@ function goToBalancingDetail(id: number) {
                     </td>
 
                     <!-- View Details Button -->
-                    <td class="px-4 py-2 whitespace-nowrap">
-                        <button class="border border-purple-600 text-gray-800 dark:text-white px-3 py-1 rounded text-sm hover:bg-purple-600 hover:text-white"
+                    <td class="px-4 py-2 whitespace-nowrap gap-4 flex items-center">
+                        <button
+                            class="border border-purple-600 text-gray-800 dark:text-white px-3 py-1 rounded text-sm hover:bg-purple-600 hover:text-white"
                             @click="goToBalancingDetail(balancing.id)">
                             View
                         </button>
+                        <i class="pi-trash pi hover:cursor-pointer text-gray-800 dark:text-white  hover:text-red-500 hover:text-red-500"
+                            @click="deleteBalancing(balancing.id)"></i>
                     </td>
                 </tr>
             </tbody>

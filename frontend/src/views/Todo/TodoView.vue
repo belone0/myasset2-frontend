@@ -99,13 +99,8 @@ const deleteTodo = (id: number) => {
                     </span>
                 </div>
 
-                <!-- Right: Delete Button (Icon or Text) -->
-                <button @click="deleteTodo(todo.id)" class="px-2 py-1 rounded text-sm text-white
-                 bg-red-600 hover:bg-red-700
-                 focus:outline-none focus:ring-2 focus:ring-red-500
-                 transition-colors">
-                    Delete
-                </button>
+                <i class="pi-trash pi hover:text-red-500 hover:cursor-pointer" @click="deleteTodo(todo.id)"></i>
+
             </div>
         </div>
     </div>

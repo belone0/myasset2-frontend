@@ -10,6 +10,9 @@ await store.fetchBalancings();
 
 const last_balancing = store.getBalancings[0];
 
+const value_to_display = Number(last_balancing.total_value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+
+
 const goToHistory = () => {
     const id = last_balancing.id;
 }
@@ -24,10 +27,10 @@ const goToNewBalancing = () => {
              md:items-center md:justify-between mb-6">
         <div>
             <div class="text-3xl md:text-4xl font-bold mb-1 text-gray-800 dark:text-gray-100">
-                R$ {{ last_balancing.total_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}
+                {{ value_to_display }}
             </div>
             <div class="text-sm text-gray-500 dark:text-gray-400">
-                Last balancing: You portfolio was last saved with this value ({{
+                Last balancing total value ({{
                     formatDate(String(last_balancing?.created_at)) }}) </div>
         </div>
         <div class="mt-4 md:mt-0 flex space-x-2">
@@ -41,7 +44,7 @@ const goToNewBalancing = () => {
                  transition-colors" @click="goToNewBalancing()">
                 New Balancing
             </button>
-            
+
 
         </div>
     </div>

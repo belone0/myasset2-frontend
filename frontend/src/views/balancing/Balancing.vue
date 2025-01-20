@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router'; // If using Vue Router
+import { useRouter } from 'vue-router'; 
 import { useBalancingStore } from '@/stores/balancing';
 import type { BalancingAsset as LocalAsset } from '@/types/BalancingAsset';
 import Conversion from '@/components/currency/Conversion.vue';
@@ -36,7 +36,13 @@ function recalculateAll() {
 }
 
 function addAsset() {
-    assets.value.push(cleanAsset);
+    assets.value.push({
+        asset_type: '',
+        current_value: 0,
+        current_percentage: 0,
+        desired_percentage: 0,
+        updated_value: 0,
+    });
 }
 
 function removeAsset(index: number) {
@@ -55,6 +61,8 @@ async function saveBalancing() {
 
     totalValue.value = 0;
     assets.value = [cleanAsset];
+
+    router.push({ name: 'BalancingResults', params: { id: createdBal.id } });
 }
 
 function goToHistory() {
@@ -76,32 +84,43 @@ function toggleCurrencyModal() {
                 <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">
                     Welcome to balancing! Add different asset types and values to balance your portfolio.
                 </p>
+
             </div>
 
-            <div class="flex flex-wrap gap-2">
-                <button
-                    class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 text-sm rounded mt-2 sm:mt-0 flex items-center"
-                    @click="toggleCurrencyModal">
-                    Convert
-                </button>
-                <button
-                    class="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-2 text-sm rounded mt-2 sm:mt-0 flex items-center"
-                    @click="goToHistory">
-                    History
-                </button>
-            </div>
+
         </div>
-
-        <div class="mb-4 w-52">
-            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
-                Total Value
-            </label>
-            <div class="text-base font-medium text-gray-800 dark:text-gray-100 
+        <div class="flex items-center">
+            <div class="mb-4 w-52">
+                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                    Total Value
+                </label>
+                <div class="text-base font-medium text-gray-800 dark:text-gray-100 
                border dark:border-gray-700 rounded-md p-2
                bg-white dark:bg-gray-800">
-                {{ totalValue }}
+                    {{ totalValue }}
+                </div>
+            </div>
+
+            <div class="flex gap-2 sm:ml-60 ml-2">
+                <div>
+                    <button
+                        class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 text-sm rounded mt-2 sm:mt-0 flex items-center"
+                        @click="toggleCurrencyModal">
+                        USD to BRL
+                    </button>
+                </div>
+                <div>
+                    <button
+                        class="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-2 text-sm rounded mt-2 sm:mt-0 flex items-center"
+                        @click="goToHistory">
+                        History
+                    </button>
+                </div>
             </div>
         </div>
+
+
+
 
         <h2 class="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2">
             Assets

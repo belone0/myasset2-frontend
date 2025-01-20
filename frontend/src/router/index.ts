@@ -7,37 +7,42 @@ const router = createRouter({
     {
       path: '/login',
       name: 'Login',
-      component: () => import('../views/auth/LoginView.vue'),
+      component: () => import('@/views/auth/LoginView.vue'),
     },
     {
       path: '/register',
       name: 'Register',
-      component: () => import('../views/auth/RegisterView.vue'),
+      component: () => import('@/views/auth/RegisterView.vue'),
     },
     {
       path: '/',
       name: 'Main',
-      component: () => import('../components/layout/Layout.vue'),
+      component: () => import('@/components/layout/Layout.vue'),
       children: [
         {
           path: 'dashboard',
           name: 'Dashboard',
-          component: () => import('../views/Dashboard.vue'),
+          component: () => import('@/views/Dashboard.vue'),
         },
         {
           path: 'todo',
           name: 'Todo',
-          component: () => import('../views/TodoView.vue'),
+          component: () => import('@/views/Todo/TodoView.vue'),
         },
         {
           path: 'balancing',
           name: 'Balancing',
-          component: () => import('../views/balancing/Balancing.vue'),
+          component: () => import('@/views/balancing/Balancing.vue'),
         },
         {
           path: '/balancing-history',
           name: 'BalancingHistory',
-          component: () => import('../views/balancing/BalancingHistory.vue'), 
+          component: () => import('@/views/balancing/BalancingHistory.vue'), 
+        },
+        {
+          path: '/balancing-results/:id',
+          name: 'BalancingResults',
+          component: () => import('@/views/balancing/BalancingResults.vue'), 
         }
         
       ],
