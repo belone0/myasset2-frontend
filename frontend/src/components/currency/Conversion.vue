@@ -40,7 +40,7 @@ const toAmount = computed(() => {
 </script>
 
 <template>
-    <div class="p-4 max-w-xs rounded-md dark:bg-gray-800 bg-white">
+    <div class="p-4 w-full rounded-md dark:bg-gray-800 bg-white">
         <h1 class="text-sm sm:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">
             {{ fromCurrency }} → {{ toCurrency }} Converter
         </h1>

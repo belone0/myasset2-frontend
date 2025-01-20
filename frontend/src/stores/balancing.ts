@@ -18,9 +18,21 @@ export const useBalancingStore = defineStore('balancing', {
             this.error = null;
             try {
                 const response = await apiClient.get('/balancings');
-                this.setBalancings(response.data);                
+                this.setBalancings(response.data);
             } catch (e: any) {
                 this.error = 'Failed to load Balancings';
+            } finally {
+                this.loading = false;
+            }
+        },
+        async fetchBalancingById(id: number) {
+            this.loading = true;
+            this.error = null;
+            try {
+                const response = await apiClient.get(`/balancings/${id}`);
+                return response.data;
+            } catch (e: any) {
+                this.error = 'Failed to load Balancing';
             } finally {
                 this.loading = false;
             }

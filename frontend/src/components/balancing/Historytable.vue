@@ -64,7 +64,7 @@ function deleteBalancing(id: number) {
 </script>
 <template>
     <!-- Table Container -->
-    <div class="overflow-x-auto bg-gray-50 dark:bg-gray-800 shadow-md rounded-lg">
+    <div v-if="balancings && balancings.length" class="overflow-x-auto bg-gray-50 dark:bg-gray-800 shadow-md rounded-lg">
         <table class="w-full border-collapse text-left">
             <!-- Table Head with purple accent -->
             <thead class="bg-white text-gray-800 dark:text-white dark:bg-gray-800 ">
@@ -145,6 +145,11 @@ function deleteBalancing(id: number) {
                 </button>
             </div>
         </div>
+    </div>
+    <div v-else>
+        <h1 class="text-2xl text-gray-800 dark:text-white">
+            You don't have any balancing yet! Create one to see it here.
+        </h1>
     </div>
 
 </template>

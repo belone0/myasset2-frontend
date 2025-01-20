@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import Historytable from '@/components/balancing/Historytable.vue';
-import Chart from '@/components/balancing/Chart.vue';
+import Chart from '@/components/balancing/Linechart.vue';
 
 </script>
 <template>
