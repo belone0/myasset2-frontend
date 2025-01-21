@@ -79,7 +79,6 @@ const date = new Date().toLocaleDateString()
       <div class="relative">
         <div class="flex items-center space-x-2 cursor-pointer" @click="toggleUserMenu">
           <img :src="userAvatar" alt="User Avatar" class="w-8 h-8 rounded-full object-cover" />
-          <span class="hidden sm:inline">{{ userName }}</span>
           <i class="pi pi-chevron-down"></i>
         </div>
 
@@ -90,6 +89,9 @@ const date = new Date().toLocaleDateString()
           leave-to-class="opacity-0 scale-95">
           <ul v-if="showUserMenu"
             class="absolute right-0 mt-2 w-48 py-2 bg-white dark:bg-gray-800 rounded shadow-xl z-20">
+            <li class="px-4 py-2  flex items-center space-x-2 cursor-pointer text-gray-700 dark:text-gray-200">
+              <span class="hidden sm:inline">{{ userName }}</span>
+            </li>
             <li
               class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center space-x-2 cursor-pointer text-gray-700 dark:text-gray-200"
               @click="onLogout">

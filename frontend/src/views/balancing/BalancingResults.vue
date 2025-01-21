@@ -74,7 +74,6 @@ onMounted(async () => {
 
 <template>
     <div class="min-h-screen p-6 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-        <!-- Page Header -->
         <div class="mb-4">
             <h1 class="text-2xl font-bold">
                 Balancing Results
@@ -87,16 +86,14 @@ onMounted(async () => {
             </p>
         </div>
 
-        <!-- Loading indicator -->
         <div v-if="loading" class="text-lg">
             Loading...
         </div>
 
         <!-- Main Content -->
         <div v-else>
-            <!-- Summary Cards -->
+
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Current total -->
                 <div class="flex flex-col py-4 rounded-lg ">
                     <span class="text-gray-700 dark:text-gray-300">Total Current Value:</span>
                     <p class="text-gray-800 dark:text-gray-100 text-2xl font-bold">
@@ -105,10 +102,9 @@ onMounted(async () => {
                 </div>
             </div>
 
-            <!-- Table -->
             <div class="overflow-x-auto bg-white dark:bg-gray-800 shadow-md rounded-lg p-4 px-6">
                 <table class="w-full border-collapse text-left">
-                    <!-- Table Head -->
+
                     <thead class="border-b border-gray-300 dark:border-gray-700">
                         <tr class="text-sm text-gray-600 dark:text-gray-300">
                             <th class="pb-3">Asset</th>
@@ -118,6 +114,7 @@ onMounted(async () => {
                             <th class="pb-3">Amount (R$)</th>
                         </tr>
                     </thead>
+
                     <tbody class="text-sm">
                         <tr v-for="(row, index) in results" :key="index" class="border-b border-gray-200 dark:border-gray-700 
                      ">
@@ -158,7 +155,6 @@ onMounted(async () => {
 
                             <!-- Action (icon + label) -->
                             <td class="py-3 pr-2 whitespace-nowrap">
-                                <!-- We can add an icon for each action -->
                                 <div class="inline-flex items-center gap-1 font-semibold" :class="{
                                     'text-green-600 dark:text-green-400': row.action === 'Buy',
                                     'text-red-600 dark:text-red-400': row.action === 'Sell',
@@ -179,7 +175,6 @@ onMounted(async () => {
                                 </div>
                             </td>
 
-                            <!-- Amount -->
                             <td class="py-3 pr-2 whitespace-nowrap">
                                 <div class="text-gray-800 dark:text-gray-100 font-medium">
                                     {{ Number(row.amount).toLocaleString('pt-BR', {
@@ -192,11 +187,11 @@ onMounted(async () => {
                 </table>
             </div>
             <div class="flex mt-6 gap-6">
-                <div class="w-1/2">
-                    <Piechart :balancing="null" :mode="'updated'" />
+                <div >
+                    <Piechart :mode="'current'" />
                 </div>
-                <div class="w-1/2">
-                    <Piechart :balancing="null" :mode="'current'" />
+                <div >
+                    <Piechart :mode="'updated'" />
                 </div>
 
             </div>

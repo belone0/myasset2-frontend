@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth', {
         const user_data = await login(email_address, password);
         this.setUser(user_data);
 
-        router.push('/dashboard');
+        router.push({ name: "Dashboard" });
         alert('Login successful');
       } catch (error) {
         console.error('Login failed:', error);
@@ -29,7 +29,7 @@ export const useAuthStore = defineStore('auth', {
         const user_data = await register(email_address, password);
         this.setUser(user_data);
 
-        router.push('/login');
+        router.push({ name: "Login" });
         alert('Registered successfully, now log in with your account!');
       } catch (error) {
         console.error('Registration failed:', error);
@@ -41,7 +41,7 @@ export const useAuthStore = defineStore('auth', {
         await logout();
         this.setUser(null);
 
-        router.push('/login');
+        router.push({ name: "Login" });
         alert('Logged out successfully');
       } catch (error) {
         console.error('Logout failed:', error);

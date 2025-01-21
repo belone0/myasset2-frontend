@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router'; 
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { useBalancingStore } from '@/stores/balancing';
 import type { BalancingAsset as LocalAsset } from '@/types/BalancingAsset';
 import Conversion from '@/components/currency/Conversion.vue';
@@ -84,9 +84,7 @@ function toggleCurrencyModal() {
                 <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">
                     Welcome to balancing! Add different asset types and values to balance your portfolio.
                 </p>
-
             </div>
-
 
         </div>
         <div class="flex items-center">
@@ -118,7 +116,6 @@ function toggleCurrencyModal() {
                 </div>
             </div>
         </div>
-
 
 
 

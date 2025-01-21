@@ -15,10 +15,11 @@ const value_to_display = Number(last_balancing.total_value).toLocaleString('pt-B
 
 const goToHistory = () => {
     const id = last_balancing.id;
+    router.push({ name: 'BalancingResults', params: { id: id } })
 }
 
 const goToNewBalancing = () => {
-    router.push('/balancing');
+    router.push({name: 'Balancing'});
 }
 </script>
 

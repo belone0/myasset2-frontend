@@ -7,4 +7,5 @@ export interface Balancing {
     created_at?: string;
     updated_at?: string;
     assets?: BalancingAsset[];
+    balancing_assets?: BalancingAsset[];
   }
