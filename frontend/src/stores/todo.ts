@@ -2,6 +2,9 @@
 import { fetchTodos, createTodo, deleteTodo, toggleTodo } from '@/services/todoService';
 import { defineStore } from 'pinia';
 import type { Todo } from '@/types/Todo';
+import { useToast } from 'vue-toastification';
+
+const toast = useToast();
 
 export const useTodoStore = defineStore('todo', {
     state: () => ({
@@ -27,7 +30,10 @@ export const useTodoStore = defineStore('todo', {
             try {
                 const created_todo = await createTodo(title);
                 this.todos.push(created_todo);
+
+                toast.success('Todo created successfully');
             } catch (err: any) {
+                toast.error('Error creating todo');
                 console.error('Create Todo Error:', err);
                 this.error = 'Failed to create todo';
             }
@@ -47,7 +53,9 @@ export const useTodoStore = defineStore('todo', {
             try {
                 await deleteTodo(todoId);
                 this.todos = this.todos.filter((t) => t.id !== todoId);
+                toast.info('Todo deleted successfully');
             } catch (err: any) {
+                toast.error('Error deleting todo');
                 console.error('Delete Todo Error:', err);
                 this.error = 'Failed to delete todo';
             }

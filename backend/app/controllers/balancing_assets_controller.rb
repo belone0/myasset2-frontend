@@ -2,7 +2,7 @@
 class BalancingAssetsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_balancing
-  before_action :set_balancing_asset, only: [:show, :update, :destroy]
+  before_action :set_balancing_asset, only: [ :show, :update, :destroy ]
 
   def index
     render json: @balancing.balancing_assets

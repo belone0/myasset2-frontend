@@ -34,7 +34,7 @@ onMounted(async () => {
     await store.fetchBalancings();
 
     if (store.balancings.length > 0) {
-        finalBalancing.value = store.balancings[store.balancings.length - 1];
+        finalBalancing.value = store.balancings[0];
         return;
     }
     

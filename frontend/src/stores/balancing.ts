@@ -2,6 +2,9 @@ import { defineStore } from 'pinia';
 import apiClient from '@/utils/axios';
 import type { Balancing } from '@/types/Balancing';
 import type { BalancingAsset } from '@/types/BalancingAsset';
+import { useToast } from 'vue-toastification';
+
+const toast = useToast();
 
 export const useBalancingStore = defineStore('balancing', {
     state: () => ({
@@ -46,26 +49,15 @@ export const useBalancingStore = defineStore('balancing', {
                     balancing: { total_value: totalValue, balancing_assets_attributes: assets },
                 });
                 const createdBalancing = response.data;
+
                 this.pushToBalancings(createdBalancing);
-                alert('created')
+                toast.success('Balancing created successfully');
                 return createdBalancing;
             } catch (err: any) {
                 this.error = 'Failed to create Balancing with assets';
-                console.error(err);
+                toast.error('Error deleting balancing');
             } finally {
                 this.loading = false;
-            }
-
-        },
-        async createBalancing(newBal: Partial<Balancing>) {
-            this.error = null;
-            try {
-                const response = await apiClient.post('/balancings', { balancing: newBal });
-                const created = response.data;
-                this.pushToBalancings(created);
-                return created;
-            } catch (e: any) {
-                this.error = 'Failed to create Balancing';
             }
         },
         async deleteBalancing(id: number) {
@@ -73,7 +65,9 @@ export const useBalancingStore = defineStore('balancing', {
             try {
                 await apiClient.delete(`/balancings/${id}`);
                 this.removeFromBalancings(id);
+                toast.info('Balancing deleted successfully');
             } catch (e: any) {
+                toast.error('Error deleting balancing');
                 this.error = 'Failed to delete Balancing';
             }
         },

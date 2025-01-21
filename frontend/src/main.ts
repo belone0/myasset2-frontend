@@ -8,6 +8,8 @@ import { useThemeStore } from './stores/theme'
 import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
 import 'primeicons/primeicons.css'
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
 
 const app = createApp(App)
 
@@ -24,6 +26,8 @@ app.use(PrimeVue, {
         preset: Aura
     }
 });
+
+app.use(Toast, { timeout: 3000 });
 
 app.use(router)
 

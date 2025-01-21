@@ -29,7 +29,7 @@ class BalancingsController < ApplicationController
       render json: @balancing.errors, status: :unprocessable_entity
     end
   end
-  
+
   def destroy
     @balancing.destroy!
     head :no_content

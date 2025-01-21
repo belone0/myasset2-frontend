@@ -180,7 +180,7 @@ function toggleCurrencyModal() {
             </button>
 
             <button class="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-2 text-sm rounded"
-                @click="saveBalancing">
+                @click="saveBalancing" :disabled="totalValue <= 0">	
                 Save
             </button>
         </div>
