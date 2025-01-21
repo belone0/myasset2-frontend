@@ -45,7 +45,7 @@ const date = new Date().toLocaleDateString()
 
       <div
         class="bg-gray-100 dark:bg-gray-800 py-1 px-3 rounded-full text-sm font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-        My Asset 2
+        My Asset
       </div>
     </div>
 
