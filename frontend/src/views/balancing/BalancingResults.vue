@@ -187,11 +187,11 @@ onMounted(async () => {
                 </table>
             </div>
             <div class="flex mt-6 gap-6">
-                <div >
-                    <Piechart :mode="'current'" />
+                <div>
+                    <Piechart :balancing="balancing" :mode="'current'" />
                 </div>
-                <div >
-                    <Piechart :mode="'updated'" />
+                <div>
+                    <Piechart :balancing="balancing" :mode="'updated'" />
                 </div>
 
             </div>

@@ -8,6 +8,7 @@ import type { Balancing } from '@/types/Balancing';
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
 const props = defineProps<{
+    balancing: Balancing | null;
     mode: 'current' | 'updated';
 }>();
 
@@ -31,6 +32,11 @@ const colorPalette = [
 ];
 
 onMounted(async () => {
+    if(props.balancing) {
+        finalBalancing.value = props.balancing;
+        return;
+    }
+
     await store.fetchBalancings();
 
     if (store.balancings.length > 0) {
@@ -81,7 +87,7 @@ const chartData = computed(() => {
         <div v-else>
             <h1 class="text-center font-bold dark:text-white text-gray-800">{{ chartData.datasets[0].label ?? 'Position'
                 }} </h1>
-            <p class="text-center -mt-1 m-0 p-0 text-xs text-gray-500 dark:text-white">Last balancing</p>
+            <p class="text-center -mt-1 m-0 p-0 text-xs text-gray-500 dark:text-white">{{ props.balancing ? 'This Balancing' : 'Last balancing'}}</p>
             <Doughnut :data="chartData" />
         </div>
     </div>

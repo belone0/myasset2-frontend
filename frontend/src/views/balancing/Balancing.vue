@@ -161,10 +161,6 @@ function toggleCurrencyModal() {
                         <strong>Current %:</strong>
                         {{ asset.current_percentage.toFixed(2) }}%
                     </p>
-                    <p>
-                        <strong>Updated Value:</strong>
-                        {{ asset.updated_value.toFixed(2) }}
-                    </p>
                 </div>
 
                 <button class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 

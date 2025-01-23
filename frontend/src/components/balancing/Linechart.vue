@@ -32,7 +32,7 @@ const chartData = ref({
             backgroundColor: 'rgb(147, 51, 234)',
             borderColor: 'rgb(147, 51, 234)',
             data: values,
-            tension: 0.1,
+            // tension: 0,
             color: '#fffff',
 
         }
