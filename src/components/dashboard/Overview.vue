@@ -10,7 +10,7 @@ await store.fetchBalancings();
 
 const last_balancing = store.getBalancings[0];
 
-const value_to_display = Number(last_balancing.total_value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+const value_to_display = Number(last_balancing.total_value ?? 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 
 
 const goToHistory = () => {
