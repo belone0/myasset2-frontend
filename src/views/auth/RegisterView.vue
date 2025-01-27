@@ -52,7 +52,7 @@ const handleSubmit = () => {
                     <label for="password" class="text-sm font-medium">
                         Confirm your password:
                     </label>
-                    <input id="password" v-model="confirm_password" type="password"
+                    <input id="confirm_password" v-model="confirm_password" type="password"
                         placeholder="Type your password again" required class="px-3 py-2 rounded bg-gray-700 text-gray-100 border border-gray-600
                        focus:outline-none focus:ring-2 focus:ring-purple-500
                        placeholder-gray-400" />
