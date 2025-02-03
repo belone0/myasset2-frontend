@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
+import { useToast } from 'vue-toastification';
 
 const email_address = ref('');
 const password = ref('');
@@ -10,7 +11,7 @@ const authStore = useAuthStore();
 
 const handleSubmit = () => {
     if (password.value !== confirm_password.value) {
-        alert('Passwords do not match!');
+        toast.success('Passwords do not match!');
         return;
     }
     authStore.register(email_address.value, password.value);

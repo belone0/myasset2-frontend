@@ -3,6 +3,7 @@ import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useBalancingStore } from '@/stores/balancing';
 import formatDate from '@/utils/formatDate';
+import { useToast } from 'vue-toastification';
 
 const store = useBalancingStore();
 const router = useRouter();
@@ -59,7 +60,7 @@ function goToBalancingDetail(id: number) {
 
 function deleteBalancing(id: number) {
     store.deleteBalancing(id);
-    alert(store.error ? store.error : 'Sucessfully deleted balancing')
+    store.error ? toast.error('Error deleting balancing') : toast.success('Successfully deleted balancing')
 }
 </script>
 <template>
