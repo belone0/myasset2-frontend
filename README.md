@@ -1,5 +1,9 @@
 # MYASSET 2 FRONTEND REPO
 
+This application is the frontend for myasset, a financial tracking system aand asset portfolio balancer
+
+https://www.linkedin.com/feed/update/urn:li:activity:7292309065290948608/
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
